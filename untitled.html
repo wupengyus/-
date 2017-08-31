@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+	.box{
+		width:823px;
+		height:604px;
+		background:url(./images/bg.png) no-repeat;
+		padding:80px 0 0 200px;
+		margin:100px auto;
+		}
+	h2{
+		width:214px;
+		height:55px;
+		margin:0;
+		padding:0;
+		margin-left:211px;
+		background:url(./images/logo.png) no-repeat center;
+		}
+	.con{
+			width:518px;
+			height:117px;
+			padding-left:108px;
+			margin-top:152px;
+			border:2px solid #5a6165;
+			border-radius:10px;
+			background:#1d2022 url(./images/timer.png) no-repeat 21px;
+			
+		}
+	.con p,.con span{
+		float:left;
+		}
+	.con p{
+		width:130px;
+		height:86px;
+		margin-top:10px;
+		padding:0;
+		border:2px solid #bcbcbd;
+		border-radius:5px;
+		background:#000;
+		position:relative;
+		overflow:hidden;
+		}
+	.con span{
+		margin-top:10px;
+		width:48px;
+		height:86px;
+		
+		}
+	.con strong{
+		position:absolute;
+		float:left;
+		width:64px;
+		height:86px;
+	}
+	.con p img{
+		width:60px;
+		height:80px;
+		border-radius:5px;
+		
+		border:3px solid #000;
+		}
+	.con span img{
+		width:48px;
+		height:86px;
+		
+	}
+</style>
+</head>
+
+<body>
+<div class="box">
+	<h2></h2>
+	<div class="con">
+    	<p>
+        	<strong>
+           		<img src="./images/img/0.png">
+            	<img src="./images/img/0.png">
+            </strong>
+            <strong>
+           		<img src="./images/img/0.png">
+           		<img src="./images/img/0.png">
+            </strong>
+        </p>
+        <span><img src="./images/img/fuh.png"></span>
+        <p>
+        	<strong>
+           		<img src="./images/img/0.png">
+            	<img src="./images/img/0.png">
+            </strong>
+            <strong>
+           		<img src="./images/img/0.png">
+            	<img src="./images/img/0.png">
+            </strong>
+        	
+        </p>
+        <span><img src="./images/img/fuh.png"></span>
+        <p>
+        	<strong>
+           		<img src="./images/img/0.png">
+            	<img src="./images/img/0.png">
+            </strong>
+            <strong>
+           		<img src="./images/img/0.png">
+            	<img src="./images/img/0.png">
+            </strong>
+        	
+        </p>
+    </div>
+</div>
+
+<script src="jQuery.js"></script>
+<script>
+	
+	
+	var strong=$('strong');
+	var images=$('.con span img');
+	var src=['./images/img/0.png','./images/img/1.png','./images/img/2.png','./images/img/3.png',
+			'./images/img/4.png','./images/img/5.png','./images/img/6.png','./images/img/7.png',
+			'./images/img/8.png','./images/img/9.png','./images/img/fuh.png','./images/img/nfh.png'];
+	strong[1].style.left='64px'
+	strong[3].style.left='64px'
+	strong[5].style.left='64px'
+	//上面为初始化；
+	
+	var timer='';
+	var oldTime='';
+	setInterval(lunfan,1000);//开定时器，
+	function lunfan(){
+		var d = new Date();
+		var hours = d.getHours();
+		var minute =d.getMinutes();
+		var second =d.getSeconds();
+		time=''+addZero(hours)+addZero(minute)+addZero(second);//获取时，分，秒 的数字类型组成数组；
+			for( var i = 0; i < time.length; i++ ){//判断每一组的值和上一组的值是否相同；
+				if(time.charAt(i) !== oldTime.charAt(i)){//如果相同，对应的一组移动；
+					var imgs=strong[i].getElementsByTagName('img');
+					imgs[1].src=src[time.charAt(i)];
+					adds(i,imgs);
+				}
+			}
+		function adds(i,imgs){
+			mTween(strong[i],'top',-86,300,'linear',function(){
+				strong[i].style.top="0px";
+				imgs[0].src=src[time[i]];
+				images[0].src=src[10];
+				images[1].src=src[10];
+				setTimeout(function(){
+					images[0].src=src[11];
+					images[1].src=src[11];
+				},300);
+			});
+		}
+		oldTime=time;
+	}
+	
+	
+		
+</script>
+</body>
+</html>
